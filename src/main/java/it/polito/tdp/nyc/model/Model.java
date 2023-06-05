@@ -3,6 +3,7 @@ package it.polito.tdp.nyc.model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -76,5 +77,10 @@ public class Model {
 		return pesoMedio;
 	}
 	
-	
+	public Map<NTA,Integer> Simula(double probShare, int durationShare) {
+		Simulator sim = new Simulator(probShare, durationShare, this.grafo);
+		sim.initialize();
+		sim.run();
+		return sim.getNumTotShare();
+	}
 }

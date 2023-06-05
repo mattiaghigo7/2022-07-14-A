@@ -2,10 +2,12 @@ package it.polito.tdp.nyc;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.nyc.model.Arco;
 import it.polito.tdp.nyc.model.Model;
+import it.polito.tdp.nyc.model.NTA;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -82,7 +84,12 @@ public class FXMLController {
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	double prob = Double.parseDouble(this.txtProb.getText());
+    	int duration = Integer.parseInt(this.txtDurata.getText());
+    	Map<NTA,Integer> condivisioni = model.Simula(prob, duration);
+    	for(NTA n : condivisioni.keySet()) {
+    		this.txtResult.appendText(n.getNTACode()+" "+condivisioni.get(n)+"\n");
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
